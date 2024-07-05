@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -42,8 +43,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
             binding?.listview?.setOnItemClickListener { parent, view, position, id ->
-                Array.removeAt(position)
-                baseAdapterClass.notifyDataSetChanged()
+                var dialog = Dialog(this)
+                dialog.setContentView(R.layout.custom_dialog2)
+                dialog.show()
+                var name = dialog.findViewById<EditText>(R.id.updatename)
+                var update = dialog.findViewById<Button>(R.id.udpate_btn)
+                var delete = dialog.findViewById<Button>(R.id.delete_btn)
+                update.setOnClickListener {
+                    Array.add(name.text.toString())
+                    dialog.dismiss()
+                    baseAdapterClass.notifyDataSetChanged()
+                }
+                delete.setOnClickListener {
+                    Array.removeAt(position)
+                    dialog.dismiss()
+                    baseAdapterClass.notifyDataSetChanged()
+                }
             }
     }
 }

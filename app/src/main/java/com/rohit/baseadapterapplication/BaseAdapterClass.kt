@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +20,7 @@ class BaseAdapterClass(var array: ArrayList<String>) : BaseAdapter() {
     }
 
     override fun getItem(position: Int): Any {
-        return ""
+        return array[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -27,7 +28,9 @@ class BaseAdapterClass(var array: ArrayList<String>) : BaseAdapter() {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.base_item_adapter,parent,false)
+        var view = LayoutInflater.from(parent?.context).inflate(R.layout.base_item_adapter,parent,false)
+        var tvName = view.findViewById<TextView>(R.id.tvname)
+        tvName.setText(array[position])
         return view
     }
 }
